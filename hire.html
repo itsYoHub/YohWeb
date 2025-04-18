@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hire Me</title>
+    <link rel="stylesheet" href="Styles.css">
+</head>
+<body>
+  
+    <section class="intro">
+      <h1>Let's Work <span class="gradient-text">Together!</span></h1>
+        <p>Looking for a skilled developer to bring your ideas to life? I'm here to help!</p>
+    </section>
+
+    <section id="contact" class="contact-card">
+        <h2>Contact Me</h2>
+        <form id="contact-form" method="POST">
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+    
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+    
+            <label for="service">Service Needed:</label>
+            <select id="service" name="service" required>
+              <option value="Web Design">Web Design</option>
+              <option value="App Developing">App Developing</option>
+              <option value="UI/UX Design">UI/UX Design</option>
+              <option value="Software Development">Software Development</option>
+            </select>
+    
+            <textarea id="message" name="message" placeholder="Your Message" required></textarea> 
+            
+            <button type="submit" class="btn" onclick="sendMail()">Send Message</button>
+    
+            <a href="index.html" class="btn">Close</a>
+        </form>
+    </section>
+                    
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+       
+        emailjs.init("jpZBXk-dH8pr1YLy4"); 
+    
+    
+        const contactForm = document.getElementById("contact-form");
+    
+        if (!contactForm) {
+          console.error("Error: Contact form not found.");
+          return;
+        }
+    
+        
+        contactForm.addEventListener("submit", function (event) {
+          event.preventDefault(); 
+    
+          
+          emailjs.sendForm("service_3kzqzwu", "template_ugb7lrr", this, "jpZBXk-dH8pr1YLy4") 
+            .then(response => {
+              alert("Your message has been sent successfully!");
+              contactForm.reset(); 
+              console.log("EmailJS Response:", response);
+            })
+            .catch(error => {
+              console.error("Error sending message:", error);
+              alert("Something went wrong. Please try sending your message again.");
+            });
+        });
+      });
+    </script>
+    
+
+
+</body>
+</html>
